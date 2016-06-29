@@ -20,49 +20,29 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/toastr/toastr.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.js"></script>
     <!-- endbower -->
     <!-- Creating a title Header -->
-
     <header>
         <h1>Movie Finder</h1>
     </header>
-
-	<!-- Create container to house contents of site -->
-
-	<div class="container-fluid">
-
-    	<!-- Create search bar with Go button -->
-
-		<form ng-submit="vm.getMovie(movieSearch); movieSearch=''" class="input-group">
-	      <input type="text" class="form-control" ng-model = "movieSearch"placeholder="Search for...">
-	      <span class="input-group-btn">
-	        <button class="btn btn-secondary" ng-click="vm.getMovie(movieSearch); movieSearch=''" type="button">Go!</button>
-	      </span>
-	    </form>
-	
-    <!-- Create mock up of state templates -->
-
-    	<div class="row stateTemplates">
-			<div class ="col-xs-4" ng-repeat="data in vm.movieInfo.Search">
-				<div class="panel panel-default">
-				  <div class="panel-heading">{{data.Title}}</div>
-				  <div class="panel-body">
-					 <img ng-if="data.Poster !== 'N/A'" ng-src="{{data.Poster}}" height="200" width="135">
-					 <img ng-if="data.Poster === 'N/A'" ng-src="/../../img/no_poster_available.jpg" height="200" width="135">
-					 <p>Filmed in: {{data.Year}}</p>
-					 <a href="">Link to IMDB</a>
-				  </div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Create a copyright footer -->
-
+    <!-- Create search bar with Go button -->
+    <div class="container">
+        <form ng-submit="vm.onFormSubmit(movieSearch); movieSearch=''" class="input-group" name="searchForm">
+            <input type="text" class="form-control" ng-model="movieSearch" placeholder="Search for...">
+            <span class="input-group-btn">
+            <a ui-sref="search({movieSearch: movieSearch})">
+               <button class="btn btn-secondary" type="button">Go!</button>
+            </a>
+          </span>
+        </form>
+    </div>
+    <div ui-view></div>
+    <!-- Create a copyright footer -->
     <footer class="centFooter">
         <p>&copy; 2016 Mark Srethabhakti.</p>
     </footer>
-
     <!-- inject:js -->
     <script src="/app/app.js"></script>
     <script src="/app/movie/movie.controller.js"></script>

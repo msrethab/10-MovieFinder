@@ -1,0 +1,34 @@
+
+
+<div class="container stateTemplates">
+	<span ng-show="vm.loading" us-spinner="{radius:30, width:8, length: 16}"></span>
+	<div ng-hide="vm.loading" class="col-xs-4">
+		<div class="panel panel-info movieDetailImage">
+			<div class="panel-body">
+				<img ng-if="data.Poster !== 'N/A'" ng-src="{{vm.movieDetail.Poster}}" height="400" width="270">
+				<img ng-if="data.Poster === 'N/A'" ng-src="/../../img/no_poster_available.jpg" height="400" width="270">
+			</div>
+		</div>
+	</div>
+	<div ng-hide="vm.loading" class="col-xs-8">
+		<div class="panel panel-info movieDetailText">
+			<div class="panel-body">
+				<div>
+					<h2>{{vm.movieDetail.Title}}</h2>
+					<p class="yearHeading">, {{vm.movieDetail.Year}}</p>
+				</div></br>
+				<p>Released on: {{vm.movieDetail.Released}} ({{vm.movieDetail.Runtime}})</p></br>
+				<p>{{vm.movieDetail.Plot}}</p></br>
+				<p>Directed by: {{vm.movieDetail.Director}}</p>
+				<p>Actors: {{vm.movieDetail.Actors}}</p>
+				<p>Genre: {{vm.movieDetail.Genre}}</p></br>
+				<p>IMDb Rating: {{vm.movieDetail.imdbRating}}
+				<p>Rotten Tomatoes: {{vm.movieDetail.tomatoRating}}</p><br>
+				<a ui-sref="home">back to Home</a>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<div ui-view></div>

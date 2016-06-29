@@ -1,0 +1,57 @@
+<div class="stateTemplates">
+    <h1>Welcome to the Movie Finder!!</h1>
+</div>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <a ui-sref="detail({movieTitle: 'Batman v Superman: Dawn of Justice', movieYear: '2016'})">
+                <img src="../../img/batmanPoster.jpg" alt="Batman v Superman">
+            </a>
+        </div>
+        <div class="item">
+            <a ui-sref="detail({movieTitle: 'Finding Dory', movieYear: '2016'})">
+                <img src="../../img/findingDoryPoster.jpg" alt="Finding Dory">
+            </a>
+        </div>
+        <div class="item">
+            <a ui-sref="detail({movieTitle: 'Me Before You', movieYear: '2016'})">
+                <img src="../../img/meBeforeYouPoster.jpg" alt="Me Before You">
+            </a>
+        </div>
+        <div class="item">
+            <a ui-sref="detail({movieTitle: 'Captain America: Civil War', movieYear: '2016'})">
+                <img src="../../img/civilWarPoster.jpg" alt="Civil War">
+            </a>
+        </div>
+        <div class="item">
+            <a ui-sref="detail({movieTitle: 'Zootopia', movieYear: '2016'})">
+                <img src="../../img/zootopiaPoster.jpg" alt="Zootopia">
+            </a>
+        </div>
+        <div class="item">
+            <a ui-sref="detail({movieTitle: 'Love & Friendship', movieYear: '2016'})">
+                <img src="../../img/loveFriendshipPoster.jpg" alt="Love and Friendship">
+            </a>
+        </div>
+    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div ui-view></div>

@@ -1,4 +1,4 @@
-
+//Creating Movie controller to handle movie search and results
 
 (function() {
     'use strict';
@@ -7,57 +7,60 @@
         .module('routerApp')
         .controller('MovieController', MovieController);
 
-    MovieController.$inject = ['MovieFactory'];
+    MovieController.$inject = ['MovieFactory', '$state', '$stateParams'];
 
     /* @ngInject */
-    function MovieController(MovieFactory) {
+    function MovieController(MovieFactory, $state, $stateParams) {
         var vm = this;
         vm.title = 'MovieController';
+
+        //Defining loading show/hide variable as well as $state parameters being passed into search state
+        vm.loading = true;
+        var movieSearch = $stateParams.movieSearch;
+
+        vm.state = $state.current;
+        vm.params = $stateParams;
+
         vm.getMovie = getMovie;
+        vm.onFormSubmit = onFormSubmit;
 
         activate();
 
         ////////////////
 
+        //Initializing each controller state change by searching if there is a search string
+
         function activate() {
-        	MovieFactory.getMovie('Batman')
-				.then(function(response) {
-
-					vm.movieInfo = response.data;
-
-					toastr.success('Movie Data Loaded!');
-
-            },
-            function(error){
-                if(typeof error === 'object'){
-                    toastr.error('There was an error: ' + error.data);  
-                } else{
-                    toastr.error(error);
-                }     
-            })
-
+            if (typeof movieSearch === 'string') {
+                vm.getMovie(movieSearch);
+            }
         }
 
-        function getMovie(movieSearch){
-        	MovieFactory.getMovie(movieSearch)
-				.then(function(response) {
+        //Defining functions for getting movies as well as submitting forms to allow users to hit enter and search
 
-					vm.movieInfo = response.data;
+        function getMovie(movieSearch) {
+            MovieFactory.getMovie(movieSearch)
+                .then(function(response) {
 
-					// if(vm.movieInfo.data.Poster === "N/A"){
-					// 	vm.movieInfo.data.Poster = "/../../img/no_poster_available.jpg"
-					// }
+                        vm.movieSearchResult = response.data;
+                        vm.loading = false;
 
-					toastr.success('Movie Data Loaded!');
+                        toastr.success('Movie Data Loaded!');
 
-            },
-            function(error){
-                if(typeof error === 'object'){
-                    toastr.error('There was an error: ' + error.data);  
-                } else{
-                    toastr.error(error);
-                }     
-            })
+                    },
+                    function(error) {
+                        if (typeof error === 'object') {
+                            toastr.error('There was an error: ' + error.data);
+                            vm.loading = false;
+                        } else {
+                            toastr.error(error);
+                            vm.loading = false;
+                        }
+                    })
+        }
+
+        function onFormSubmit(movieSearch) {
+            $state.go('search', { 'movieSearch': movieSearch });
         }
     }
 })();
